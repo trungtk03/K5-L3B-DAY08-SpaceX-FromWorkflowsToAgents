@@ -62,6 +62,10 @@ Chạy trên toàn bộ 14 claims public × 5 seeds (11, 22, 33, 44, 55) = 70 tr
 - **Shape được chọn:** **`workflow`**.
 - **Lý do:** Đáp ứng trọn vẹn cả ba tiêu chí: Pass rate cao nhất (100%), độ ổn định tuyệt đối (Variance = 0), và chi phí vận hành thấp nhất (28.79 VND so với 49.57 VND của Swarm). Xem chi tiết tại `report/team/decision_adr.md`.
 
+### 4.4. Kết quả Tự kiểm tra trên tập Hidden (`student_drop/` — `src/reports/hidden_selfcheck.json`)
+- Nhóm đã thực thi tự kiểm tra thành công trên toàn bộ 40 claims hidden × 5 seeds = 200 trials cho 5 shapes (tổng cộng 1.000 trials).
+- **Kết quả:** 1.000/1.000 trials hoàn thành bình thường, **0 lỗi ngoại lệ** (exceptions: 0), **0 lỗi format**, **0 nghi vấn rò rỉ secret/PII** (`leak_suspect: 0`). Tất cả file trace đều tuân thủ nghiêm ngặt Trace contract v1.
+
 ## 5. Khó khăn và cách xử lý
 
 1. **Vấn đề trần hoàn tiền theo đơn (T13 & T14):**
