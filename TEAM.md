@@ -13,7 +13,7 @@
 | --: | ------ | ---- | ----- | ------ | ------- |
 |   1 | Nguyễn Hoàng Trung | 2A202603826 | 26ai.trungnh@vinui.edu.vn | trungtk03 | Workflow + Integration (Lead) |
 |   2 | Nguyễn Tuấn Dũng | 2A202603859 | 26ai.dungnt16@vinuni.edu.vn | DungNguyen74 | Single ReAct Agent |
-|   3 | Phùng Thị Nhài | 2A202603725 | 2A202603725@st.vinuni.edu.vn | nhaipt | Orchestrator + Handoff Security |
+|   3 | Phùng Thị Nhài | 2A202603725 | nhaipt342k4@gmail.com | nhaipt342K4 | Orchestrator + Handoff Security |
 |   4 | Lương Thị Hồng Hạnh | 2A202603748 | 26ai.hanhlth@vinuni.edu.vn | hatrang200715 | Durability, Benchmark & Evaluation |
 
 Gợi ý chia vai:
@@ -29,7 +29,7 @@ Gợi ý chia vai:
 | --- | --- | --- | --- |
 | Nguyễn Hoàng Trung | Workflow + Integration | 1c75422 | tests/test_workflow_custom.py |
 | Nguyễn Tuấn Dũng | Single ReAct Agent | eb1af72 | tests/test_single_custom.py |
-| Phùng Thị Nhài | Orchestrator + Handoff | b65a5ad | tests/test_orchestrator_custom.py |
+| Phùng Thị Nhài | Orchestrator + Handoff | b65a5ad, 08b518d | tests/test_orchestrator_custom.py |
 | Lương Thị Hồng Hạnh | Durability + Evaluation | b5125b5 | tests/test_durability_custom.py |
 
 ## Cá nhân
@@ -81,10 +81,11 @@ Sao chép mục dưới đây cho từng thành viên.
 ### Đóng góp cụ thể
 
 - Commit `b65a5ad`, viết `src/lab8/shapes/orchestrator.py`, thêm test `src/tests/test_orchestrator_custom.py`.
+- Commit `08b518d`, bổ sung test các nhánh `needs_info`, `escalated`, `denied` (injection, approval hết hạn) và test quét secret/PII trên toàn bộ 14 claim public; sửa mô tả bảo mật Shape C trong `group_report.md`.
 
 ### Bằng chứng
 
-- Pass rate 1.000, 62/62 student test pass, secret leak = 0, approval bypass = 0, run id `R-orchestrator-C-001-s11`.
+- Pass rate 1.000, 62/62 student test pass, 20/20 custom test pass, secret leak = 0, approval bypass = 0, run id `R-orchestrator-C-001-s11`.
 
 ## 2A202603748_LuongThiHongHanh
 
