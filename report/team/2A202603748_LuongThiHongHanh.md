@@ -4,8 +4,8 @@
 
 - Họ tên: Lương Thị Hồng Hạnh
 - MSSV: 2A202603748
-- Email: 2A202603748@st.vinuni.edu.vn
-- GitHub: hanhlth
+- Email: 26ai.hanhlth@vinuni.edu.vn
+- GitHub: hatrang200715
 
 ## 2. Phần việc phụ trách
 
