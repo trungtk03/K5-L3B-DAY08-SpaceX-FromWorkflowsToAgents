@@ -14,7 +14,7 @@
 |   1 | Nguyễn Hoàng Trung | 2A202603826 | 2A202603826@st.vinuni.edu.vn | trungtk03 | Workflow + Integration (Lead) |
 |   2 | Nguyễn Tuấn Dũng | 2A202603859 | 26ai.dungnt16@vinuni.edu.vn | DungNguyen74 | Single ReAct Agent |
 |   3 | Phùng Thị Nhài | 2A202603725 | 2A202603725@st.vinuni.edu.vn | nhaipt | Orchestrator + Handoff Security |
-|   4 | Lương Thị Hồng Hạnh | 2A202603748 | 2A202603748@st.vinuni.edu.vn | hanhlth | Durability, Benchmark & Evaluation |
+|   4 | Lương Thị Hồng Hạnh | 2A202603748 | 26ai.hanhlth@vinuni.edu.vn | hatrang200715 | Durability, Benchmark & Evaluation |
 
 Gợi ý chia vai:
 

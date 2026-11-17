@@ -39,5 +39,6 @@
 
 ## 6. Tự đánh giá
 
-- Hoàn thành trọn vẹn toàn bộ các báo cáo định lượng và kiểm thử độ bền hệ thống.
-- Điểm tự đánh giá: Đạt tối đa yêu cầu.
+- Biết cách kiểm soát độ bền, thực nghiệm và chấm điểm
+- Kết nối kiến thức bài giảng với thực hành
+- Phối hợp với các thành viên nhóm hoàn thành đầy đủ các yêu cầu bài
