@@ -2,17 +2,19 @@
 
 ## Thông tin nhóm
 
-- Tên nhóm:
-- Lớp: L3A
-- Repo nhóm: `K5-L3A-DAY08-TenNhom-FromWorkflowsToAgents` (xem [SUBMISSION.md](SUBMISSION.md))
+- Tên nhóm: SpaceX
+- Lớp: L3B
+- Repo nhóm: `K5-L3B-DAY08-SpaceX-FromWorkflowsToAgents` (xem [SUBMISSION.md](SUBMISSION.md))
 - URL repo, nhánh nộp, commit chốt:
 
 ## Thành viên
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
-|   1 |        |      |       |        |         |
-|   2 |        |      |       |        |         |
+|   1 | Nguyễn Hoàng Trung | 2A202603826 | | | Workflow + Integration (Lead) |
+|   2 | Nguyễn Tuấn Dũng | 2A202603859 | | | Single ReAct Agent |
+|   3 | Phùng Thị Nhài | 2A202603725 | | | Orchestrator + Handoff Security |
+|   4 | Lương Thị Hồng Hạnh | 2A202603748 | | | Durability, Benchmark & Evaluation |
 
 Gợi ý chia vai:
 
