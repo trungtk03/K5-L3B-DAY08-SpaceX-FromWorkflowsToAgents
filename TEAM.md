@@ -27,7 +27,10 @@ Gợi ý chia vai:
 
 | Người | Vai | Commit | Test đã thêm hoặc sửa |
 | --- | --- | --- | --- |
-| | | | |
+| Nguyễn Hoàng Trung | Workflow + Integration | 1c75422 | tests/test_workflow_custom.py |
+| Nguyễn Tuấn Dũng | Single ReAct Agent | eb1af72 | tests/test_single_custom.py |
+| Phùng Thị Nhài | Orchestrator + Handoff | b65a5ad | tests/test_orchestrator_custom.py |
+| Lương Thị Hồng Hạnh | Durability + Evaluation | b5125b5 | tests/test_durability_custom.py |
 
 ## Cá nhân
 
