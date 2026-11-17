@@ -4,7 +4,7 @@
 
 - Họ tên: Nguyễn Hoàng Trung
 - MSSV: 2A202603826
-- Email: 2A202603826@st.vinuni.edu.vn
+- Email: 26ai.trungnh@vinui.edu.vn
 - GitHub: trungtk03
 
 ## 2. Phần việc phụ trách
