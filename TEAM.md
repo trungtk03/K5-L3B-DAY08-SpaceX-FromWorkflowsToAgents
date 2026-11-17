@@ -12,7 +12,7 @@
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
 |   1 | Nguyễn Hoàng Trung | 2A202603826 | 26ai.trungnh@vinui.edu.vn | trungtk03 | Workflow + Integration (Lead) |
-|   2 | Nguyễn Tuấn Dũng | 2A202603859 | 2A202603859@st.vinuni.edu.vn | TuanDungNguyen | Single ReAct Agent |
+|   2 | Nguyễn Tuấn Dũng | 2A202603859 | 26ai.dungnt16@vinuni.edu.vn | DungNguyen74 | Single ReAct Agent |
 |   3 | Phùng Thị Nhài | 2A202603725 | 2A202603725@st.vinuni.edu.vn | nhaipt | Orchestrator + Handoff Security |
 |   4 | Lương Thị Hồng Hạnh | 2A202603748 | 26ai.hanhlth@vinuni.edu.vn | hatrang200715 | Durability, Benchmark & Evaluation |
 
@@ -62,15 +62,15 @@ Sao chép mục dưới đây cho từng thành viên.
 
 ### Phần việc phụ trách
 
-- Shape B (Single ReAct Agent), cấu hình 8 steps, chống prompt injection.
+- Shape B (Single ReAct Agent), cấu hình chặn cứng 8 steps, thiết lập worker mode chỉ đọc, phòng chống prompt injection & hallucination.
 
 ### Đóng góp cụ thể
 
-- Commit `eb1af72`, viết `src/lab8/shapes/single.py`, thêm test `src/tests/test_single_custom.py`.
+- Commit `eb1af72` và commit cập nhật, viết `src/lab8/shapes/single.py`, thêm bộ test suite `src/tests/test_single_custom.py` (7 tests).
 
 ### Bằng chứng
 
-- Pass rate 1.000, 62/62 student test pass, run id `R-single-C-001-s11`.
+- Pass rate 1.000, 62/62 student test pass, 7/7 custom test pass, run id `R-single-C-001-s11`.
 
 ## 2A202603725_PhungThiNhai
 

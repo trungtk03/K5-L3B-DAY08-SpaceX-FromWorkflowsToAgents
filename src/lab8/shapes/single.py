@@ -104,7 +104,7 @@ def _run(conn: sqlite3.Connection, claim_id: str, *, seed: int, crash_at: str | 
         observation={"claim": claim_view},
         decide=decide,
         max_steps=8,
-        worker=False,
+        worker=True,
     )
 
     if react_outcome.get("stopped") == "step_cap":
