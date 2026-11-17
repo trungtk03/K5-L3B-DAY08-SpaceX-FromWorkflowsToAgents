@@ -5,16 +5,16 @@
 - Tên nhóm: SpaceX
 - Lớp: L3B
 - Repo nhóm: `K5-L3B-DAY08-SpaceX-FromWorkflowsToAgents` (xem [SUBMISSION.md](SUBMISSION.md))
-- URL repo, nhánh nộp, commit chốt:
+- URL repo, nhánh nộp, commit chốt: https://github.com/trungtk03/K5-L3B-DAY08-SpaceX-FromWorkflowsToAgents, main, 030710f
 
 ## Thành viên
 
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
-|   1 | Nguyễn Hoàng Trung | 2A202603826 | | | Workflow + Integration (Lead) |
-|   2 | Nguyễn Tuấn Dũng | 2A202603859 | | | Single ReAct Agent |
-|   3 | Phùng Thị Nhài | 2A202603725 | | | Orchestrator + Handoff Security |
-|   4 | Lương Thị Hồng Hạnh | 2A202603748 | | | Durability, Benchmark & Evaluation |
+|   1 | Nguyễn Hoàng Trung | 2A202603826 | 2A202603826@st.vinuni.edu.vn | trungtk03 | Workflow + Integration (Lead) |
+|   2 | Nguyễn Tuấn Dũng | 2A202603859 | 2A202603859@st.vinuni.edu.vn | TuanDungNguyen | Single ReAct Agent |
+|   3 | Phùng Thị Nhài | 2A202603725 | 2A202603725@st.vinuni.edu.vn | nhaipt | Orchestrator + Handoff Security |
+|   4 | Lương Thị Hồng Hạnh | 2A202603748 | 2A202603748@st.vinuni.edu.vn | hanhlth | Durability, Benchmark & Evaluation |
 
 Gợi ý chia vai:
 
@@ -44,16 +44,58 @@ Ví dụ: `report/team/20241234_NguyenVanAn.md`.
 
 Sao chép mục dưới đây cho từng thành viên.
 
-## MSSV_HoTen
+## 2A202603826_NguyenHoangTrung
 
 ### Phần việc phụ trách
 
--
+- Trưởng nhóm (Lead), quản lý repo, hiện thực Shape A (Workflow).
 
 ### Đóng góp cụ thể
 
--
+- Commit `1c75422`, viết `src/lab8/shapes/workflow.py`, thêm test `src/tests/test_workflow_custom.py`.
 
 ### Bằng chứng
 
--
+- Pass rate 1.000, 62/62 student test pass, run id `R-workflow-C-001-s11`.
+
+## 2A202603859_NguyenTuanDung
+
+### Phần việc phụ trách
+
+- Shape B (Single ReAct Agent), cấu hình 8 steps, chống prompt injection.
+
+### Đóng góp cụ thể
+
+- Commit `eb1af72`, viết `src/lab8/shapes/single.py`, thêm test `src/tests/test_single_custom.py`.
+
+### Bằng chứng
+
+- Pass rate 1.000, 62/62 student test pass, run id `R-single-C-001-s11`.
+
+## 2A202603725_PhungThiNhai
+
+### Phần việc phụ trách
+
+- Shape C (Orchestrator + Investigators), khử khuẩn Handoff, an toàn bảo mật ranh giới.
+
+### Đóng góp cụ thể
+
+- Commit `b65a5ad`, viết `src/lab8/shapes/orchestrator.py`, thêm test `src/tests/test_orchestrator_custom.py`.
+
+### Bằng chứng
+
+- Pass rate 1.000, 62/62 student test pass, secret leak = 0, approval bypass = 0, run id `R-orchestrator-C-001-s11`.
+
+## 2A202603748_LuongThiHongHanh
+
+### Phần việc phụ trách
+
+- Durability, Ledger Idempotency, Crash Test Suite, Benchmark 4 shapes × 5 seeds, ADR & Research card.
+
+### Đóng góp cụ thể
+
+- Commit `b5125b5`, chạy crash suite 20/20, chạy benchmark, thêm test `src/tests/test_durability_custom.py`.
+
+### Bằng chứng
+
+- `crash_safety = 20/20` (`reports/crash.json`), benchmark 4 shape x 14 claim x 5 seed (`reports/benchmark.json`), ADR và Research card hoàn chỉnh.
