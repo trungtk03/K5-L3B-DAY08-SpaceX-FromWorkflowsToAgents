@@ -5,7 +5,7 @@
 
 - Tên nhóm: SpaceX
 - Thành viên: Nguyễn Hoàng Trung, Nguyễn Tuấn Dũng, Phùng Thị Nhài, Lương Thị Hồng Hạnh (xem chi tiết tại `TEAM.md`)
-- Commit chốt: `b5125b5` (trùng khớp với `report/team/decision_adr.md`)
+- Commit chốt: `f44653d` (trùng khớp với `report/team/decision_adr.md`)
 
 ## 2. Mục tiêu và cách tiếp cận
 
