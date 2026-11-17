@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide Thuyết Trình Lab 8 - Nhóm SpaceX (L3B)</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #131b2e;
+      --card-border: #1e293b;
+      --accent-cyan: #38bdf8;
+      --accent-blue: #6366f1;
+      --accent-green: #22c55e;
+      --accent-orange: #f59e0b;
+      --accent-red: #ef4444;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* Presentation Frame */
+    .presentation-container {
+      position: relative;
+      width: 92vw;
+      max-width: 1280px;
+      height: 82vh;
+      max-height: 720px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Slides Wrapper */
+    .slides-wrapper {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 48px 64px;
+      display: none;
+      flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* Header */
+    .slide-header {
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .slide-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      letter-spacing: -0.5px;
+    }
+
+    .slide-tag {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    /* Content Area */
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      font-size: 1.15rem;
+      line-height: 1.6;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    /* Card Box */
+    .card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      color: var(--accent-cyan);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p, .card li {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 8px;
+    }
+
+    ul li::before {
+      content: "•";
+      color: var(--accent-cyan);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    th {
+      background-color: #1e293b;
+      color: var(--accent-cyan);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+    }
+
+    tr:hover td {
+      background-color: rgba(56, 189, 248, 0.05);
+    }
+
+    .highlight-cell {
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .badge-success {
+      background: rgba(34, 197, 94, 0.1);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    .badge-fail {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: var(--accent-red);
+      color: var(--accent-red);
+    }
+
+    /* Speaker Notes Drawer */
+    .speaker-notes-panel {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #020617;
+      border-top: 2px solid var(--accent-blue);
+      padding: 16px 24px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      z-index: 20;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .speaker-notes-panel.open {
+      transform: translateY(0);
+    }
+
+    .speaker-notes-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-orange);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .speaker-notes-text {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    /* Controls Bar */
+    .controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      background: #0b1120;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    button {
+      background: #1e293b;
+      color: var(--text);
+      border: 1px solid #334155;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background: var(--accent-cyan);
+      color: #020617;
+      border-color: var(--accent-cyan);
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 4px;
+      background: var(--card-border);
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+      width: 12.5%;
+      transition: width 0.3s ease;
+    }
+
+    /* Slide Title Card */
+    .title-slide {
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .title-slide h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+
+    .title-slide .subtitle {
+      font-size: 1.3rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    .team-badge-container {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .member-pill {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid #334155;
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 0.9rem;
+    }
+
+    .member-pill strong {
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="presentation-container">
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="slides-wrapper">
+
+      <!-- SLIDE 1: Title -->
+      <div class="slide active title-slide" data-notes="Kính chào thầy cô và các bạn, hôm nay nhóm SpaceX xin báo cáo bài Lab 8: Giải quyết bài toán hoàn phí LogiX-VN qua 4 kiến trúc từ Workflow đến Multi-Agent Swarm, từ đó đưa ra quyết định kiến trúc dựa trên số liệu thực nghiệm.">
+        <span class="badge">AI20K K5 — DAY 8 LAB</span>
+        <h1>FROM WORKFLOWS TO AGENTS</h1>
+        <div class="subtitle">LogiX-VN: Một Task Hoàn Phí, Bốn Kiến Trúc</div>
+        <div class="team-badge-container">
+          <div class="member-pill"><strong>Nguyễn Hoàng Trung</strong> (Lead & Workflow)</div>
+          <div class="member-pill"><strong>Nguyễn Tuấn Dũng</strong> (Single ReAct)</div>
+          <div class="member-pill"><strong>Phùng Thị Nhài</strong> (Orchestrator)</div>
+          <div class="member-pill"><strong>Lương Thị Hồng Hạnh</strong> (Durability & Eval)</div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: Problem & Security Boundaries -->
+      <div class="slide" data-notes="Nhóm xác định rõ ngay từ đầu: trong hệ thống tài chính, LLM không được phép quyết định tiền bạc. Mã nguồn xác định là nơi tính toán, và cổng duyệt host kiểm tra tính hợp lệ trước khi ghi sổ cái SQLite.">
+        <div class="slide-header">
+          <div class="slide-title">1. Bài Toán & 3 Ranh Giới An Toàn</div>
+          <div class="slide-tag">Security & Policy</div>
+        </div>
+        <div class="slide-content">
+          <div class="grid-2">
+            <div class="card">
+              <h3>🎯 Bài Toán Nghiệp Vụ</h3>
+              <ul>
+                <li>Xử lý bồi thường trễ hạn (≥ 3 ngày) và hỏng hàng đã xác minh.</li>
+                <li>Khách hàng có thể khai khống hoặc gửi prompt injection trong ticket.</li>
+                <li>Đơn có thể đã được hoàn trước đó (phải tính trần theo đơn).</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>🛡️ 3 Ranh Giới An Toàn Sống Còn</h3>
+              <ul>
+                <li><strong>Tiền do Code quyết định:</strong> <code>compute_compensation</code> tính số tiền; model chỉ đọc và soạn chữ.</li>
+                <li><strong>Host duyệt và ghi sổ:</strong> Cổng <code>issue_refund</code> kiểm tra approval, trần đơn và idempotency.</li>
+                <li><strong>Cô lập PII & Secret:</strong> Handoff chỉ truyền allowlist; trace không lộ <code>CANARY_SECRET_*</code> hay SĐT, địa chỉ.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: Four Architectures -->
+      <div class="slide" data-notes="Cả 4 shape đều chia sẻ cùng chữ ký run_claim. Ở Shape B, nhóm giới hạn 8 bước ReAct và chỉ cấp công cụ đọc. Ở Shape C, Orchestrator giao việc cho investigator thông qua cơ chế bàn giao dữ kiện bóc tách PII.">
+        <div class="slide-header">
+          <div class="slide-title">2. Bốn Kiến Trúc Trên Cùng 1 Task</div>
+          <div class="slide-tag">Topology Design</div>
+        </div>
+        <div class="slide-content">
+          <div class="grid-4">
+            <div class="card">
+              <h3>Shape A · Workflow</h3>
+              <p>Mã tuần tự xác định (Deterministic).</p>
+              <ul>
+                <li>Code kiểm tra điều kiện</li>
+                <li>Tính quote trực tiếp</li>
+                <li>Gọi host ghi refund</li>
+                <li>Chi phí thấp nhất</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Shape B · Single ReAct</h3>
+              <p>Một tác tử ReAct tự động hóa.</p>
+              <ul>
+                <li>Chặn cứng 8 bước</li>
+                <li>Chỉ cấp Read-Tools</li>
+                <li>Không tin ticket text</li>
+                <li>Host là bên ghi duy nhất</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Shape C · Orchestrator</h3>
+              <p>Nhạc trưởng & Điều tra viên.</p>
+              <ul>
+                <li>Gói handoff khử khuẩn</li>
+                <li>Điều tra viên chỉ đọc</li>
+                <li>Orchestrator đề xuất quote</li>
+                <li>Bảo mật đa tác tử</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Shape D · Swarm (Ref)</h3>
+              <p>Đàn tác tử phân tán ngang hàng.</p>
+              <ul>
+                <li>Cung cấp làm mốc đối chứng</li>
+                <li>Yếu điểm ở seed 55: tin số ngày trong ticket</li>
+                <li>Chi phí & variance cao</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: Benchmark Results -->
+      <div class="slide" data-notes="Nhìn vào bảng số liệu benchmark, Shape A, B, C đều qua 100% test. Tuy nhiên Swarm tham chiếu rớt ở seed 55 (tại claim C-002, khách hàng ghi trễ 5 ngày nhưng order thực tế trễ 2 ngày, Swarm tin lời khách nên duyệt sai). Về chi phí, Workflow rẻ hơn Swarm tới 72%.">
+        <div class="slide-header">
+          <div class="slide-title">3. Kết Quả Thực Nghiệm Benchmark</div>
+          <div class="slide-tag">14 Claims × 5 Seeds (70 Trials / Shape)</div>
+        </div>
+        <div class="slide-content">
+          <table>
+            <thead>
+              <tr>
+                <th>Kiến trúc (Shape)</th>
+                <th>Pass Rate</th>
+                <th>Pass^5</th>
+                <th>Seed Variance</th>
+                <th>Cost / Success</th>
+                <th>Mean Steps</th>
+                <th>Đánh giá</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Shape A (Workflow)</strong></td>
+                <td class="highlight-cell">1.000</td>
+                <td class="highlight-cell">1.000</td>
+                <td class="highlight-cell">0.000000</td>
+                <td class="highlight-cell">28.79 đ</td>
+                <td>2.79</td>
+                <td><span class="badge badge-success">Tối ưu nhất</span></td>
+              </tr>
+              <tr>
+                <td><strong>Shape B (Single Agent)</strong></td>
+                <td>1.000</td>
+                <td>1.000</td>
+                <td>0.000000</td>
+                <td>29.65 đ</td>
+                <td>1.86</td>
+                <td><span class="badge badge-success">Ổn định</span></td>
+              </tr>
+              <tr>
+                <td><strong>Shape C (Orchestrator)</strong></td>
+                <td>1.000</td>
+                <td>1.000</td>
+                <td>0.000000</td>
+                <td>47.85 đ</td>
+                <td>3.71</td>
+                <td><span class="badge badge-success">An toàn</span></td>
+              </tr>
+              <tr>
+                <td><strong>Shape D (Swarm Ref)</strong></td>
+                <td>0.986</td>
+                <td>0.929</td>
+                <td>0.000816</td>
+                <td>49.57 đ</td>
+                <td>2.80</td>
+                <td><span class="badge badge-fail">Lỗi Seed 55</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="font-size: 0.9rem; color: var(--text-muted); text-align: center;">
+            Cổng an toàn: <strong>Crash Safety 20/20</strong> | <strong>Secret Leak: 0</strong> | <strong>Approval Bypass: 0</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: ADR Decision -->
+      <div class="slide" data-notes="Theo đúng triết lý của AI20K: 'Kiến trúc là một giả thuyết, benchmark là bằng chứng'. Nhóm không chọn Multi-Agent chỉ vì nó thời thượng. Dữ liệu chứng minh Deterministic Workflow là lựa chọn chuẩn xác nhất cho bài toán này.">
+        <div class="slide-header">
+          <div class="slide-title">4. Quyết Định Kiến Trúc (ADR)</div>
+          <div class="slide-tag">Architectural Decision Record</div>
+        </div>
+        <div class="slide-content">
+          <div class="card" style="border-left: 4px solid var(--accent-green);">
+            <h3 style="color: var(--accent-green);">🏆 Lựa Chọn Chính Thức: Shape A (Workflow)</h3>
+            <p style="font-size: 1.05rem; margin-top: 6px; color: var(--text);">
+              Áp dụng nguyên tắc vàng: <strong>"Chọn kiến trúc ít tự chủ nhất mà vẫn làm được việc"</strong>.
+            </p>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <h3>Vì sao chọn Workflow?</h3>
+              <ul>
+                <li><strong>Độ tin cậy 100%:</strong> Loại bỏ hoàn toàn rủi ro ảo giác từ LLM.</li>
+                <li><strong>Chi phí thấp nhất:</strong> 28.79 VND (tiết kiệm 72% so với Swarm).</li>
+                <li><strong>Phương sai = 0:</strong> Hoàn toàn nhất quán qua mọi seed.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Khi nào mới chuyển sang Multi-Agent?</h3>
+              <ul>
+                <li>Khi dữ liệu đầu vào là <strong>phi cấu trúc phức tạp</strong> (ảnh hóa đơn mờ, thương lượng hợp đồng mờ).</li>
+                <li>Khi nhiệm vụ đòi hỏi phân rã đa mục tiêu vượt quá khả năng của rule-based engine.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: Durability & Crash Safety -->
+      <div class="slide" data-notes="Về mặt công nghệ phần mềm, nhóm đảm bảo tính ACID và Idempotency. Dù hệ thống có sập nguồn ở bất kỳ thời điểm nào trước hay sau khi ghi sổ, việc chạy lại luôn đảm bảo không bao giờ bồi thường 2 lần cho khách hàng.">
+        <div class="slide-header">
+          <div class="slide-title">5. Độ Bền (Durability) & Chống Ghi Trùng Tiền</div>
+          <div class="slide-tag">Crash Safety 20/20</div>
+        </div>
+        <div class="slide-content">
+          <div class="grid-2">
+            <div class="card">
+              <h3>🔒 Idempotency & Transaction</h3>
+              <ul>
+                <li>Khóa định danh duy nhất: <code>refund:{claim_id}</code>.</li>
+                <li>Effect và audit committed cùng nằm trong transaction SQLite <code>BEGIN IMMEDIATE</code>.</li>
+                <li>Khi retry sau crash: nhận diện effect đã có, trả về <code>idempotent_replay</code> và không ghi thêm dòng mới.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>⚖️ Xử Lý Trần Theo Đơn (T13, T14)</h3>
+              <ul>
+                <li>Quy tắc: Shape truyền <strong>toàn bộ quote</strong> vào <code>issue_refund</code>.</li>
+                <li>Host tự đọc <code>order_refunded_vnd</code> để trừ đi phần đã chi trả trước đó (tránh lỗi trừ 2 lần).</li>
+                <li>Đơn đã hoàn đủ (T13) ➔ Từ chối, audit <code>policy_denied</code>.</li>
+                <li>Entitlement mới lớn hơn (T14) ➔ Chỉ hoàn phần chênh lệch.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 7: Bonus B3 -->
+      <div class="slide" data-notes="Ở phần điểm cộng Bonus, nhóm triển khai biến thể Swarm Verified. Chúng em chứng minh được rằng cơ chế kiểm chứng bằng code đã triệt tiêu hoàn toàn sai lệch của Swarm, nhưng đồng thời cũng chứng minh Swarm không đem lại lợi ích kinh tế so với Workflow.">
+        <div class="slide-header">
+          <div class="slide-title">6. Điểm Cộng: Bonus B3 (Swarm Verified)</div>
+          <div class="slide-tag">Google Research 2026 · Evaluator-Optimizer</div>
+        </div>
+        <div class="slide-content">
+          <div class="grid-2">
+            <div class="card">
+              <h3>Cơ Sở Nghiên Cứu</h3>
+              <p>Nghiên cứu của Google Research chỉ ra: <em>Agent tự do có thể khuếch đại sai lệch lên tới 17.2×</em>.</p>
+              <p style="margin-top: 8px;"><strong>Giải pháp B3:</strong> Bổ sung bước <strong>code-level verifier</strong> kiểm tra ground-truth trong DB trước khi ra quyết định ghi refund.</p>
+            </div>
+            <div class="card">
+              <h3>Kết Quả Thực Nghiệm</h3>
+              <ul>
+                <li>Pass rate Swarm: <strong>0.986 ➔ 1.000</strong> (khắc phục lỗi seed 55).</li>
+                <li>Seed variance: <strong>0.000816 ➔ 0.000000</strong>.</li>
+                <li>Chi phí: tăng lên <strong>57.29 VND</strong> (đắt gần gấp đôi Workflow).</li>
+                <li><strong>Kết luận:</strong> Khi code verifier đã làm hết việc đúng, phần đàm phán của Swarm trở nên dư thừa!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 8: Summary & Team -->
+      <div class="slide" data-notes="Cả 4 thành viên đều có commit kỹ thuật độc lập và bộ test unit riêng trong repo. Nhóm SpaceX đã sẵn sàng trả lời các câu hỏi của giảng viên. Xin cảm ơn thầy cô!">
+        <div class="slide-header">
+          <div class="slide-title">7. Tổng Kết & Nghiệm Thu Bài Nộp</div>
+          <div class="slide-tag">Nghiệm Thu Grader</div>
+        </div>
+        <div class="slide-content">
+          <div class="card" style="text-align: center; background: rgba(34, 197, 94, 0.08); border-color: var(--accent-green);">
+            <h2 style="color: var(--accent-green); margin-bottom: 8px;">python -m lab8.check_submission ➔ 0 FAIL, 0 WARN</h2>
+            <p>Đạt chuẩn 100/100 điểm chính + 10/10 điểm Bonus B3</p>
+          </div>
+          <div class="grid-4" style="margin-top: 10px;">
+            <div class="card">
+              <h4>Nguyễn Hoàng Trung</h4>
+              <p style="font-size: 0.8rem;">Lead & Workflow</p>
+              <p style="font-size: 0.75rem; color: var(--accent-cyan);">Commit: 1c75422</p>
+            </div>
+            <div class="card">
+              <h4>Nguyễn Tuấn Dũng</h4>
+              <p style="font-size: 0.8rem;">Single ReAct Agent</p>
+              <p style="font-size: 0.75rem; color: var(--accent-cyan);">Commit: eb1af72</p>
+            </div>
+            <div class="card">
+              <h4>Phùng Thị Nhài</h4>
+              <p style="font-size: 0.8rem;">Orchestrator & Sec</p>
+              <p style="font-size: 0.75rem; color: var(--accent-cyan);">Commit: b65a5ad</p>
+            </div>
+            <div class="card">
+              <h4>Lương Thị Hồng Hạnh</h4>
+              <p style="font-size: 0.8rem;">Durability & Benchmark</p>
+              <p style="font-size: 0.75rem; color: var(--accent-cyan);">Commit: b5125b5</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Speaker Notes Panel -->
+    <div class="speaker-notes-panel" id="speakerNotesPanel">
+      <div class="speaker-notes-title">🎙️ Lời thoại thuyết trình (Speaker Notes)</div>
+      <div class="speaker-notes-text" id="speakerNotesText"></div>
+    </div>
+
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+      <div>
+        <span id="slideCounter">Slide 1 / 8</span>
+        <span style="margin-left: 16px; font-size: 0.75rem; color: #64748b;">(Phím tắt: [←][→] chuyển slide | [S] bật lời thoại | [F] toàn màn hình)</span>
+      </div>
+      <div class="btn-group">
+        <button id="notesBtn">🎙️ Lời thoại (S)</button>
+        <button id="prevBtn">❮ Trước</button>
+        <button id="nextBtn">Tiếp ❯</button>
+        <button id="fullscreenBtn">⛶ Toàn màn hình</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const notesBtn = document.getElementById('notesBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const slideCounter = document.getElementById('slideCounter');
+    const progressBar = document.getElementById('progressBar');
+    const speakerNotesPanel = document.getElementById('speakerNotesPanel');
+    const speakerNotesText = document.getElementById('speakerNotesText');
+
+    let currentSlide = 0;
+    let notesOpen = false;
+
+    function updateSlide(index) {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (index + slides.length) % slides.length;
+      slides[currentSlide].classList.add('active');
+
+      // Update counter & progress
+      slideCounter.textContent = `Slide ${currentSlide + 1} / ${slides.length}`;
+      progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
+
+      // Update speaker notes
+      const notes = slides[currentSlide].getAttribute('data-notes') || 'Không có ghi chú cho slide này.';
+      speakerNotesText.textContent = notes;
+    }
+
+    prevBtn.addEventListener('click', () => updateSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => updateSlide(currentSlide + 1));
+
+    function toggleNotes() {
+      notesOpen = !notesOpen;
+      if (notesOpen) {
+        speakerNotesPanel.classList.add('open');
+        notesBtn.style.background = 'var(--accent-orange)';
+        notesBtn.style.color = '#020617';
+      } else {
+        speakerNotesPanel.classList.remove('open');
+        notesBtn.style.background = '';
+        notesBtn.style.color = '';
+      }
+    }
+
+    notesBtn.addEventListener('click', toggleNotes);
+
+    fullscreenBtn.addEventListener('click', () => {
+      const container = document.querySelector('.presentation-container');
+      if (!document.fullscreenElement) {
+        container.requestFullscreen().catch(err => alert(err.message));
+      } else {
+        document.exitFullscreen();
+      }
+    });
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        updateSlide(currentSlide + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+        updateSlide(currentSlide - 1);
+      } else if (e.key === 's' || e.key === 'S') {
+        toggleNotes();
+      } else if (e.key === 'f' || e.key === 'F') {
+        fullscreenBtn.click();
+      }
+    });
+
+    // Initialize
+    updateSlide(0);
+  </script>
+</body>
+</html>
